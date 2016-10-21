@@ -101,7 +101,7 @@ ServletRequestAware, ServletResponseAware  {
 			//SimpleDateFormat sdf=new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 			grade.setGid(UUID.randomUUID().toString().replace("-","").substring(0, 10));
 			//grade.setSnumber((String)session.get("number"));
-			grade.setSnumber("2016218001");
+			grade.setSnumber((String)session.get("number"));
 			grade.setGstarttime(new Date());
 			grade.setGlevel(flag);
 			HIsession = HibernateSessionFactory.getSession();// »ñµÃsession

@@ -17,6 +17,9 @@
 			<result name="gradeDetail">/WEB-INF/gradedetail.jsp</result>
 			<result name="rank">/WEB-INF/rank.jsp</result>
 			<result name="students">/WEB-INF/teacher.jsp</result>
+			<result name="goScore">/WEB-INF/score.jsp</result>
+			<result name="goIndex">/index.html</result>
+			<result name="personToUpdate">/WEB-INF/person_update.jsp</result>
 		</action>
 	</package>
 

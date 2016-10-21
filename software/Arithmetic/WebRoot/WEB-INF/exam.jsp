@@ -126,9 +126,9 @@ b {
 					}
 				}
 				var flag = theRequest.flag; */
-				alert("uuu");
+				//alert("uuu");
 				var flag ='<%=request.getAttribute("flag")%>';
-				alert(flag);
+				//alert(flag);
 				//document.getElementById('flag').value = flag;
 				//Next();
 				$.ajax({
@@ -414,7 +414,7 @@ b {
 						{
 							//end-now就是秒数
 
-							end : '1476528266350',
+							end : '1476528267445',
 							now : '1476528266245',
 							labels : true,
 							labelsOptions : {

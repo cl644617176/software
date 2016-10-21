@@ -3,6 +3,7 @@ package ljf.action;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,13 +19,16 @@ import ljf.service.impl.StudentServiceImpl;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
+import org.hibernate.Session;
 
 import utils.JsonTools;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class TeacherAction extends ActionSupport implements
 		ServletRequestAware, ServletResponseAware {
+	private Map<String, Object> session=ActionContext.getContext().getSession();
 	private HttpServletResponse resp;
 	private HttpServletRequest req;
 	private GradeService gs = new GradeServiceImpl();

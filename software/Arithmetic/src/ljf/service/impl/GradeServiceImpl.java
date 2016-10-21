@@ -26,7 +26,7 @@ public class GradeServiceImpl extends BaseServiceImpl<Grade> implements GradeSer
 			// TODO Auto-generated method stub
 			List<Grade> list=new ArrayList<Grade>();
 			//ascÊÇÉıĞò   descÊÇ½µĞò
-			list=find("from Grade where snumber='"+snumber+"' and glevel='"+level+"' order by gstarttime desc");
+			list=find("from Grade where snumber='"+snumber+"' and glevel='"+level+"' order by gstarttime asc");
 			return list;
 		}
 

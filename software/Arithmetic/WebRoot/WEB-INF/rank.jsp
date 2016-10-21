@@ -104,7 +104,7 @@ a:hover {
 	height: 20px;
 	margin-bottom: 5px;
 	width: 400px;
-	padding-left: 20px;
+	/* padding-left: 20px; */
 	white-space: nowrap;
 	overflow: hidden;
 	position: relative;
@@ -246,24 +246,30 @@ a:hover {
 			<s:iterator value="#request.rankList" var="rank" status="st">
 				<s:if test="#st.index==0">
 					<li class="top3" style="margin-top: 420px;height: 30px;">
-					<em><s:property	value="#st.index+1" /></em>
-					 <span style="color:#FF44AA; font-size:25px;margin-left:150px;"><s:property value="#rank.name" /></span> <span><s:property
-								value="#rank.gscore" /></span></li>
+					<img alt="冠军" src="image/t_1.png" style="width: 30px;height: 30px;">
+					 <span style="color:#FF44AA; font-size:25px;margin-left:118px;"><s:property value="#rank.name" /></span>
+					 <span style="color:#FF3333; font-size:25px;margin-left:100px;"><s:property
+								value="#rank.gscore" />分</span></li>
 				</s:if>
-				<s:if test="#st.index<3">
-					<s:if test="#st.index==0">
-					</s:if>
-					<s:else>
-						<li class="top3"><em><s:property value="#st.index+1" /></em>
-							<a href="#"><s:property value="#rank.name" /></a> <span><s:property
-									value="#rank.gscore" /></span></li>
-					</s:else>
-
-				</s:if>
+				<s:elseif test="#st.index==1">
+					<li class="top3" style="height: 30px;">
+					<img alt="亚军" src="image/t_2.png" style="width: 30px;height: 30px;">
+					 <span style="color:#FF44AA; font-size:25px;margin-left:118px;"><s:property value="#rank.name" /></span>
+					 <span style="color:#FF3333; font-size:25px;margin-left:100px;"><s:property
+								value="#rank.gscore" />分</span></li>
+				</s:elseif>
+				<s:elseif test="#st.index==2">
+					<li class="top3" style="height: 30px;">
+					<img alt="季军" src="image/t_3.png" style="width: 30px;height: 30px;">
+					 <span style="color:#FF44AA; font-size:25px;margin-left:118px;"><s:property value="#rank.name" /></span>
+					 <span style="color:#FF3333; font-size:25px;margin-left:100px;"><s:property
+								value="#rank.gscore" />分</span></li>
+				</s:elseif>
+				
 				<s:else>
-					<li><em><s:property value="#st.index+1" /></em> <a href="#"><s:property
-								value="#rank.name" /></a> <span><s:property
-								value="#rank.gscore" /></span></li>
+					<li style="margin-left: 5px;"><em><s:property value="#st.index+1" /></em> <span style="color:#FF44AA; font-size:25px;margin-left:150px;"><s:property value="#rank.name" /></span>
+					 <span style="color:#FF3333; font-size:25px;margin-left:100px;"><s:property
+								value="#rank.gscore" />分</span></li>
 				</s:else>
 
 

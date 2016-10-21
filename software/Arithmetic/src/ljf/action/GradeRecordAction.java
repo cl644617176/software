@@ -3,6 +3,7 @@ package ljf.action;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import utils.JsonTools;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class GradeRecordAction extends ActionSupport implements
@@ -32,6 +34,7 @@ public class GradeRecordAction extends ActionSupport implements
 	private GradeService gs = new GradeServiceImpl();
 	private ExamService es = new ExamServiceImpl();
 	private StudentService ss = new StudentServiceImpl();
+	private Map<String, Object> session=ActionContext.getContext().getSession();
 
 	// 标识请求的是第几页的数据
 	public String askPageNum;
@@ -39,19 +42,35 @@ public class GradeRecordAction extends ActionSupport implements
 	public String InforGid;
 
 	public String snu_tea;
+	
+	//跳转去查看成绩折线图  学生的功能
+	
+	public String goScore(){
+		return "goScore";
+	}
 
 	public void getScore() {
+		//前十个
 		List<Grade> listP = new ArrayList<Grade>();
 		List<Grade> listM = new ArrayList<Grade>();
 		List<Grade> listH = new ArrayList<Grade>();
 		if (snu_tea == null || snu_tea.equals("")) {
-			listP = gs.getFrontRecordByLevel("2016218001", "primary");
-			listM = gs.getFrontRecordByLevel("2016218001", "medium");
-			listH = gs.getFrontRecordByLevel("2016218001", "higher");
+			listP = gs.getFrontRecordByLevel((String)session.get("number"), "primary");
+			listM = gs.getFrontRecordByLevel((String)session.get("number"), "medium");
+			listH = gs.getFrontRecordByLevel((String)session.get("number"), "higher");
 		} else {
 			listP = gs.getFrontRecordByLevel(snu_tea, "primary");
 			listM = gs.getFrontRecordByLevel(snu_tea, "medium");
 			listH = gs.getFrontRecordByLevel(snu_tea, "higher");
+		}
+		if(listP.size()>10){
+			listP=getTopTen(listP);
+		}
+		if(listM.size()>10){
+			listM=getTopTen(listM);
+		}
+		if(listH.size()>10){
+			listH=getTopTen(listH);
 		}
 
 		System.out.println(listP.size() + "***" + listM.size() + "*********"
@@ -69,6 +88,15 @@ public class GradeRecordAction extends ActionSupport implements
 			e.printStackTrace();
 		}
 
+	}
+	
+	//得到前十个数据
+	public List<Grade> getTopTen(List<Grade> data){
+		List<Grade> list=new ArrayList<Grade>();
+		for(int i=0;i<10;i++){
+			list.add(data.get(i));
+		}
+		return list;
 	}
 
 	public String gradeInfor() {
@@ -91,7 +119,7 @@ public class GradeRecordAction extends ActionSupport implements
 		int pages = 5;
 		List<Grade> data=new ArrayList<Grade>();
 		if (snu_tea == null || snu_tea.equals("")) {
-			data = gs.getFrontRecord("2016218001");
+			data = gs.getFrontRecord((String)session.get("number"));
 		}else{
 			data = gs.getFrontRecord(snu_tea);
 		}

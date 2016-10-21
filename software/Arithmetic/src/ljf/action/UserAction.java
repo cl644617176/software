@@ -46,6 +46,28 @@ public class UserAction extends ActionSupport implements
 	public String loginNumber;
 	public Student stu=new Student();
 	public String SNumberJudge;
+	public String new_pas;
+	public String old_pas;
+	public String s_number;
+	
+	public String personToUpdate(){
+		if((session.get("role")!=null)&&(((String)session.get("role")).equals("student"))){
+			//判断登录的是学生 返回学生信息 学号 老师姓名  姓名  原密码
+			Student student=ss.getByHql("from Student where snumber='"+(String)session.get("number")+"'");
+			req.setAttribute("student", student);
+			Teacher teacher=ts.getByHql("from Teacher where tnumber='"+student.getTnumber()+"'");
+			req.setAttribute("tname", teacher.getTname());
+			return "personToUpdate";
+		}
+		else{
+			return "goIndex";
+		}
+		
+	}
+	
+	public void personUpdate(){
+		System.out.println(new_pas);
+	}
 	
 	public String register(){
 		try {
@@ -162,6 +184,32 @@ public class UserAction extends ActionSupport implements
 
 	public void setSNumberJudge(String sNumberJudge) {
 		SNumberJudge = sNumberJudge;
+	}
+	
+	
+
+	public String getNew_pas() {
+		return new_pas;
+	}
+
+	public void setNew_pas(String new_pas) {
+		this.new_pas = new_pas;
+	}
+
+	public String getOld_pas() {
+		return old_pas;
+	}
+
+	public void setOld_pas(String old_pas) {
+		this.old_pas = old_pas;
+	}
+
+	public String getS_number() {
+		return s_number;
+	}
+
+	public void setS_number(String s_number) {
+		this.s_number = s_number;
 	}
 
 	@Override
